@@ -36,6 +36,16 @@ public class World {
         return newData;
     }
 
+    public void update() {
+        Chunk[][] newData = new Chunk[SIZE][SIZE];
+        for (int y = 0; y < SIZE; y++) {
+            for (int x = 0; x < SIZE; x++) {
+                newData[y][x] = worldData[y][x].getNext();
+            }
+        }
+        worldData = newData;
+    }
+
     public Chunk getChunk(Position pos) {
         return worldData[pos.getY()][pos.getX()];
     }

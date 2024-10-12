@@ -1,15 +1,17 @@
 package display;
 
-import javax.swing.JFrame;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
+import lombok.Setter;
+
+import javax.swing.*;
+import java.awt.*;
+
 
 public class Window {
     JFrame frame;
+    @Setter
     WorldPanel worldPanel;
     public Window() {
         frame = new JFrame("IsoWorld"); // Create the window
-        worldPanel = new WorldPanel();
 
         // Get screen size
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
@@ -25,5 +27,11 @@ public class Window {
         frame.setResizable(true);
         frame.setVisible(true);
         //f.setExtendedState(JFrame.MAXIMIZED_BOTH); // Set fullscreen
+    }
+
+    public void setWorldPanel(WorldPanel worldPanel) {
+        this.worldPanel = worldPanel;
+        frame.add(worldPanel);
+        frame.pack();
     }
 }

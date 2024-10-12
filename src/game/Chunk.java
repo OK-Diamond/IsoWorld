@@ -1,8 +1,12 @@
 package game;
 
-import game.tiles.*;
-import lombok.*;
+import game.tiles.Empty;
 import game.tiles.Tile;
+import game.tiles.Tree;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import static main.Consts.CONSTS;
 import static main.Consts.Game.GAME_CONSTS;
@@ -107,23 +111,14 @@ public class Chunk {
      * Calculates the {@link #chunkData} for the next frame.
      * @return chunkData for the next frame
      */
-    public Tile[][] getNext() {
-        Tile[][] newChunk = new Tile[SIZE][SIZE];
+    public Chunk getNext() {
+        Tile[][] newChunkData = new Tile[SIZE][SIZE];
         for (int y = 0; y < SIZE; y++) {
             for (int x = 0; x < SIZE; x++) {
-                newChunk[y][x] = chunkData[y][x].getNext();
+                newChunkData[y][x] = chunkData[y][x].getNext();
             }
         }
-        return newChunk;
-    }
-
-    /**
-     * @return A chunk with the data from {@link #getNext()}.
-     */
-    public Chunk update() {
-        Chunk newChunk = new Chunk(new Tile[SIZE][SIZE], pos);
-        newChunk.setChunkData(getNext());
-        return newChunk;
+        return new Chunk(newChunkData, pos);
     }
 
     /**

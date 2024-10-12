@@ -1,26 +1,38 @@
 package display;
 
 import game.World;
-import main.Consts;
+import lombok.Setter;
+
+import static main.Consts.Display.DISPLAY_CONSTS;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class WorldPanel extends JPanel {
-    private int width = Consts.Display.Instance.WINDOW_WIDTH;
-    private int height = Consts.Display.Instance.WINDOW_HEIGHT;
+    private int width =  DISPLAY_CONSTS.WINDOW_WIDTH;
+    private int height = DISPLAY_CONSTS.WINDOW_HEIGHT;
+    @Setter
     private World world;
 
-    public WorldPanel() {
+    public void setWidth(int width) {
+        this.width = width;
+        this.setPreferredSize(new Dimension(this.width, this.height));
+    }
+    public void setHeight(int height) {
+        this.height = height;
+        this.setPreferredSize(new Dimension(this.width, this.height));
+    }
+
+    public WorldPanel(World world) {
         // Create the world
-        world = new World();
         this.setPreferredSize(new Dimension(width, height));
 
 
         // Timer to control the frame rate
         Timer timer = new Timer(
-                Consts.Display.Instance.FRAME_TIME,
+                DISPLAY_CONSTS.FRAME_TIME,
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
